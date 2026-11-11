@@ -1,0 +1,40 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.lyricplayer.tvn'
+    compileSdk 34
+
+    defaultConfig {
+        // 웹뷰 버전(com.lyricplayer.tv)과 따로 설치해 비교할 수 있도록 다른 앱 ID 를 쓴다
+        applicationId 'com.lyricplayer.tvn'
+        minSdk 21
+        // 29: 안드로이드 10/11 이상에서도 /storage/XXXX 경로의 USB 를 파일 관리자 없이 직접 읽기 위함 (직접 설치용)
+        targetSdk 29
+        versionCode 2
+        versionName '0.2-native-test'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+        disable 'ExpiredTargetSdkVersion', 'OldTargetApi', 'UnsafeOptInUsageError'
+    }
+}
+
+dependencies {
+    // 소리 재생 (화면과 별개의 스레드에서 동작)
+    implementation 'androidx.media3:media3-exoplayer:1.3.1'
+}
